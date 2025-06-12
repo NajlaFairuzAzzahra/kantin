@@ -1,168 +1,237 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kantin FH UNDIP - Beranda</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
-      --bg: #FAF9F6;
-      --primary: #A6845E;
-      --primary-dark: #8B6C4A;
-      --text: #2F2F2F;
+      --bg: #FEF9E1;
+      --primary: #A31D1D;
+      --primary-dark: #6D2323;
+      --accent: #E5D0AC;
+      --text: #6D2323;
       --light: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--text);
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      line-height: 1.6;
+      scroll-behavior: smooth;
     }
 
     header {
+      padding: 1.5rem 2rem;
       background-color: var(--light);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      padding: 1rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid #ddd;
     }
 
     header h1 {
-      font-weight: 600;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
+      font-weight: 700;
       color: var(--primary-dark);
     }
 
-    .hero-section {
-      position: relative;
-      background-image: url('images/kantin-hero.jpg');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      text-align: center;
-      padding: 6rem 2rem 5rem;
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
     }
 
-    .hero-section::before {
+    nav ul li a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      background: url('images/kantin-hero.jpg') center/cover no-repeat;
+      height: 70vh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 4rem;
+      color: white;
+      position: relative;
+    }
+
+    .hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.4));
+      background: rgba(0, 0, 0, 0.45);
     }
 
-    .hero-section > * {
+    .hero-content {
       position: relative;
       z-index: 1;
+      text-align: right;
+      max-width: 540px;
     }
 
-    .hero-section h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
+    .hero-content h2 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--light);
     }
 
-    .hero-section p {
-      max-width: 680px;
+    .hero-content p {
+      font-size: 1.15rem;
+      margin-top: 1rem;
+      color: var(--light);
+    }
+
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1280px;
       margin: 0 auto;
-      font-size: 1.1rem;
-      line-height: 1.7;
     }
 
-    .menu-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin: 3rem auto;
-      padding: 0 1rem;
+    .section h2 {
+      font-size: 2.6rem;
+      color: var(--primary);
+      margin-bottom: 2.5rem;
+      text-align: center;
     }
 
-    .menu-buttons a {
-      background: var(--primary);
-      color: white;
-      font-weight: 600;
-      font-size: 1.1rem;
-      padding: 1rem 2.5rem;
-      border-radius: 50px;
-      text-decoration: none;
+    .section p {
+      max-width: 680px;
+      font-size: 1.05rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .menu-grid {
+      margin-top: 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .menu-card {
+      background: var(--light);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
     }
 
-    .menu-buttons a:hover {
-      background: var(--primary-dark);
-      transform: translateY(-3px) scale(1.03);
+    .menu-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .menu-card .card-body {
+      padding: 1.25rem 1.5rem;
+      flex: 1;
+    }
+
+    .menu-card h3 {
+      margin: 0 0 0.5rem;
+      color: var(--primary-dark);
+      font-size: 1.4rem;
+    }
+
+    .menu-card p {
+      font-size: 0.95rem;
+      color: #5a5a5a;
     }
 
     footer {
-      background: var(--light);
-      border-top: 1px solid #eee;
-      padding: 2rem 1.5rem;
+      background: var(--primary);
+      color: var(--light);
+      padding: 2.5rem 1.5rem;
       text-align: center;
-      font-size: 0.9rem;
-      color: #777;
-      margin-top: auto;
-    }
-
-    .footer-logos {
-      margin-bottom: 0.75rem;
-    }
-
-    .footer-logos img {
-      height: 32px;
-      margin: 0 8px;
-      vertical-align: middle;
-    }
-
-    @media (max-width: 768px) {
-      .hero-section h1 {
-        font-size: 2rem;
-      }
-      .menu-buttons {
-        flex-direction: column;
-      }
-      .menu-buttons a {
-        width: 100%;
-        text-align: center;
-      }
+      font-size: 0.95rem;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Kantin FH UNDIP</h1>
-    <img src="images/logo-kelompok.png" alt="Logo" style="height: 40px;">
-  </header>
+<header style="position: sticky; top: 0; z-index: 1000; background: var(--light); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+  <h1 style="color: var(--primary-dark); font-size: 1.5rem; font-weight: 700;">Kantin FH UNDIP</h1>
+  <nav>
+    <ul style="list-style: none; display: flex; gap: 1.5rem; margin: 0;">
+      <li><a href="#menu" style="text-decoration: none; font-weight: 600; color: var(--primary-dark);">Menu</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <section class="hero-section">
-    <h1>Selamat Datang</h1>
-    <p>Website ini dibuat oleh Tim KKN-T Kelompok 7 dalam program Kantin Halal Fakultas Hukum UNDIP untuk menghadirkan informasi menu yang higienis, sehat, dan mudah diakses.</p>
-  </section>
-
-  <section>
-    <div class="menu-buttons">
-      <a href="menu-a.html">🍱 Menu Kantin A</a>
-      <a href="menu-b.html">🍛 Menu Kantin B</a>
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Selamat Datang</h2>
+      <p>Menu sehat dan informatif dari Kantin Fakultas Hukum UNDIP yang dirancang dengan estetika modern dan bersih.</p>
     </div>
   </section>
 
-  <footer>
-    <div class="footer-logos">
-      <img src="images/logo-undip.png" alt="UNDIP">
-      <img src="images/logo-mbkm.png" alt="MBKM">
-      <a href="https://instagram.com/akun_kknmu" target="_blank">
-        <img src="images/icon-instagram.png" alt="Instagram">
-      </a>
+  <section id="menu" class="section">
+    <h2>Menu Hari Ini</h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img src="images/nasi-goreng-telor.jpg" alt="Nasi Goreng Telor">
+        <div class="card-body">
+          <h3>Nasi Goreng Telor</h3>
+          <p>520 kalori</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="images/ayam-geprek.jpg" alt="Ayam Geprek">
+        <div class="card-body">
+          <h3>Ayam Geprek</h3>
+          <p>600 kalori</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <img src="images/nasi-campur.jpg" alt="Nasi Pecel">
+        <div class="card-body">
+          <h3>Nasi Pecel</h3>
+          <p>450 kalori</p>
+        </div>
+      </div>
     </div>
-    <div>© 2025 KKN-T Kelompok 7 — Fakultas Hukum UNDIP</div>
+  </section>
+
+<section class="section">
+  <h2> PIlihan Kantin</h2>
+  <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
+    <a href="menu-a.html" style="background: var(--primary); color: white; padding: 1rem 2.5rem; border-radius: 40px; font-weight: 600; text-decoration: none; font-size: 1.1rem; box-shadow: 0 6px 12px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+      Kantin A
+    </a>
+    <a href="menu-b.html" style="background: var(--primary); color: white; padding: 1rem 2.5rem; border-radius: 40px; font-weight: 600; text-decoration: none; font-size: 1.1rem; box-shadow: 0 6px 12px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+      Kantin B
+    </a>
+  </div>
+</section>
+
+
+  <footer id="kontak">
+    <p>© 2025 Tim KKN-T Kelompok 7 — Fakultas Hukum UNDIP</p>
+    <p>Hubungi kami via Instagram: <a href="https://instagram.com/temankantin.fh" style="color: #fff; text-decoration: underline;">@temankantin.fh</a></p>
   </footer>
-
 </body>
 </html>

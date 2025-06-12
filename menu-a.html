@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Menu Kantin A - FH Undip</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
   <style>
     :root {
-      --background: #FAF9F6;
-      --text: #2F2F2F;
-      --accent: #A6845E;
-      --accent-dark: #8B6C4A;
+      --background: #FEF9E1;
+      --text: #6D2323;
+      --accent: #A31D1D;
+      --accent-dark: #6D2323;
       --box: #FFFFFF;
       --border: #E0DED9;
     }
@@ -23,32 +23,69 @@
       color: var(--text);
     }
 
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--box);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    header h1 {
+      color: var(--accent-dark);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+    }
+
+    header nav ul li a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--accent-dark);
+    }
+
     .menu-card {
       transition: all 0.3s ease;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
       background-color: var(--box);
       cursor: pointer;
     }
 
     .menu-card:hover {
-      transform: translateY(-5px) scale(1.02);
+      transform: translateY(-6px) scale(1.02);
     }
 
     .menu-image {
       width: 100%;
-      height: 160px;
+      height: 170px;
       object-fit: cover;
     }
 
     .menu-body {
-      padding: 1rem;
+      padding: 1.25rem;
+    }
+
+    .menu-body h2 {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--accent-dark);
     }
 
     .swiper {
       width: 100%;
-      height: 240px;
+      height: 250px;
       border-radius: 12px;
       overflow: hidden;
     }
@@ -95,25 +132,62 @@
     }
 
     .modal-background {
-    backdrop-filter: blur(0px);
-    background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      background-color: rgba(0, 0, 0, 0.3);
     }
 
     .is-active {
       background-color: var(--accent);
       color: white;
     }
+
+    .title.is-size-3 {
+      color: var(--accent);
+    }
+
+    .subtitle.is-size-6 {
+      color: #7a6e5d;
+    }
+
+    .buttons button {
+      border: 1px solid #ddd;
+      transition: all 0.25s ease;
+    }
+
+    .buttons button:hover {
+      background-color: var(--accent-dark);
+      color: white;
+      border-color: var(--accent-dark);
+    }
+
+    footer {
+      background: var(--accent);
+      color: var(--box);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.95rem;
+      margin-top: 4rem;
+    }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Kantin FH UNDIP</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="#menu-list">Menu</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <section class="section">
     <div class="container">
       <div class="has-text-centered mb-5">
         <h1 class="title is-size-3 has-text-weight-semibold">Menu Kantin A</h1>
-        <p class="subtitle is-size-6 has-text-grey">Daftar menu yang tersedia di Kantin A</p>
+        <p class="subtitle is-size-6">Daftar menu yang tersedia di Kantin A</p>
       </div>
 
-      <!-- Filter Buttons -->
       <div class="buttons is-centered mb-5" id="kategori-filter">
         <button class="button is-rounded is-light is-active" data-kategori="all">Semua</button>
         <button class="button is-rounded is-light" data-kategori="Makanan Berat">Makanan Berat</button>
@@ -125,7 +199,6 @@
     </div>
   </section>
 
-  <!-- Modal -->
   <div class="modal" id="menuModal">
     <div class="modal-background" onclick="closeModal()"></div>
     <div class="modal-card" style="width: 90%; max-width: 900px;">
@@ -150,6 +223,11 @@
       <button class="modal-close is-large" aria-label="close" onclick="closeModal()"></button>
     </div>
   </div>
+
+  <footer>
+    <p>© 2025 Tim KKN-T Kelompok 7 — Fakultas Hukum UNDIP</p>
+    <p>Hubungi kami via Instagram: <a href="https://instagram.com/akun_kknmu" target="_blank" style="color: #fff; text-decoration: underline;">@akun_kknmu</a></p>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
@@ -193,62 +271,64 @@
 
     const menuList = document.getElementById("menu-list");
 
-    // Generate cards
-    menuItems.forEach((item, index) => {
-      const col = document.createElement("div");
-      col.className = "column is-one-third";
-      col.innerHTML = `
-        <div class="menu-card" data-index="${index}" data-kategori="${item.category}">
-          <img src="${item.images[0]}" alt="${item.name}" class="menu-image">
-          <div class="menu-body">
-            <h2 class="title is-5 mb-2">${item.name}</h2>
-            <p class="is-size-7 has-text-grey">Kategori: ${item.category}</p>
+    function renderMenu(filter = "all") {
+      menuList.innerHTML = "";
+      menuItems.filter(item => filter === "all" || item.category === filter).forEach((item, index) => {
+        const col = document.createElement("div");
+        col.className = "column is-one-third";
+        col.innerHTML = `
+          <div class="menu-card" data-index="${index}" data-kategori="${item.category}">
+            <img src="${item.images[0]}" alt="${item.name}" class="menu-image">
+            <div class="menu-body">
+              <h2 class="title is-5 mb-2">${item.name}</h2>
+              <p class="is-size-7 has-text-grey">Kategori: ${item.category}</p>
+            </div>
           </div>
-        </div>
-      `;
-      menuList.appendChild(col);
-    });
+        `;
+        menuList.appendChild(col);
+      });
+      attachModalEvents();
+    }
 
-    // Filter with buttons
+    function attachModalEvents() {
+      document.querySelectorAll(".menu-card").forEach(card => {
+        card.addEventListener("click", () => {
+          const index = card.dataset.index;
+          const item = menuItems[index];
+          document.getElementById("modalTitle").textContent = item.name;
+          document.getElementById("modalDescription").textContent = item.description;
+          document.getElementById("modalCalories").textContent = item.kalori;
+          const swiperWrapper = document.getElementById("modalSwiperWrapper");
+          swiperWrapper.innerHTML = "";
+          item.images.forEach(img => {
+            const slide = document.createElement("div");
+            slide.className = "swiper-slide";
+            slide.innerHTML = `<img src="${img}" alt="${item.name}">`;
+            swiperWrapper.appendChild(slide);
+          });
+          document.getElementById("menuModal").classList.add("is-active");
+          new Swiper(".mySwiper", {
+            pagination: { el: ".swiper-pagination" },
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }
+          });
+        });
+      });
+    }
+
     document.querySelectorAll('#kategori-filter button').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('#kategori-filter button').forEach(b => b.classList.remove('is-active'));
         btn.classList.add('is-active');
         const selected = btn.dataset.kategori;
-        menuItems.forEach((item, i) => {
-          const show = selected === "all" || item.category === selected;
-          menuList.children[i].style.display = show ? "block" : "none";
-        });
-      });
-    });
-
-    // Modal logic
-    document.querySelectorAll(".menu-card").forEach(card => {
-      card.addEventListener("click", () => {
-        const index = card.dataset.index;
-        const item = menuItems[index];
-        document.getElementById("modalTitle").textContent = item.name;
-        document.getElementById("modalDescription").textContent = item.description;
-        document.getElementById("modalCalories").textContent = item.kalori;
-        const swiperWrapper = document.getElementById("modalSwiperWrapper");
-        swiperWrapper.innerHTML = "";
-        item.images.forEach(img => {
-          const slide = document.createElement("div");
-          slide.className = "swiper-slide";
-          slide.innerHTML = `<img src="${img}" alt="${item.name}">`;
-          swiperWrapper.appendChild(slide);
-        });
-        document.getElementById("menuModal").classList.add("is-active");
-        new Swiper(".mySwiper", {
-          pagination: { el: ".swiper-pagination" },
-          navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }
-        });
+        renderMenu(selected);
       });
     });
 
     function closeModal() {
       document.getElementById("menuModal").classList.remove("is-active");
     }
+
+    renderMenu();
   </script>
 </body>
 </html>
