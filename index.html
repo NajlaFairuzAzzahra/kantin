@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kantin FH UNDIP - Beranda</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF9F6;
+      --primary: #A6845E;
+      --primary-dark: #8B6C4A;
+      --text: #2F2F2F;
+      --light: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: var(--light);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+    }
+
+    .hero-section {
+      position: relative;
+      background-image: url('images/kantin-hero.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 6rem 2rem 5rem;
+    }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.4));
+    }
+
+    .hero-section > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-section h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-section p {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .menu-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+
+    .menu-buttons a {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .menu-buttons a:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px) scale(1.03);
+    }
+
+    footer {
+      background: var(--light);
+      border-top: 1px solid #eee;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: auto;
+    }
+
+    .footer-logos {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-logos img {
+      height: 32px;
+      margin: 0 8px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+      .menu-buttons {
+        flex-direction: column;
+      }
+      .menu-buttons a {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Kantin FH UNDIP</h1>
+    <img src="images/logo-kelompok.png" alt="Logo" style="height: 40px;">
+  </header>
+
+  <section class="hero-section">
+    <h1>Selamat Datang</h1>
+    <p>Website ini dibuat oleh Tim KKN-T Kelompok 7 dalam program Kantin Halal Fakultas Hukum UNDIP untuk menghadirkan informasi menu yang higienis, sehat, dan mudah diakses.</p>
+  </section>
+
+  <section>
+    <div class="menu-buttons">
+      <a href="menu-a.html">🍱 Menu Kantin A</a>
+      <a href="menu-b.html">🍛 Menu Kantin B</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logos">
+      <img src="images/logo-undip.png" alt="UNDIP">
+      <img src="images/logo-mbkm.png" alt="MBKM">
+      <a href="https://instagram.com/akun_kknmu" target="_blank">
+        <img src="images/icon-instagram.png" alt="Instagram">
+      </a>
+    </div>
+    <div>© 2025 KKN-T Kelompok 7 — Fakultas Hukum UNDIP</div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu Kantin B - FH Undip</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <style>
+    :root {
+      --background: #FAF9F6;
+      --text: #2F2F2F;
+      --accent: #A6845E;
+      --accent-dark: #8B6C4A;
+      --box: #FFFFFF;
+      --border: #E0DED9;
+    }
+
+    body {
+      background-color: var(--background);
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+    }
+
+    .menu-card {
+      transition: all 0.3s ease;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      background-color: var(--box);
+      cursor: pointer;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    .menu-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .menu-body {
+      padding: 1rem;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 240px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: #fffef8;
+      padding: 0.5rem;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: var(--accent);
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+    }
+
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+      background-color: var(--accent);
+      color: white;
+    }
+
+    .modal-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+      animation: fadeScale 0.3s ease-out;
+    }
+
+    @keyframes fadeScale {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-card-body {
+      padding: 2rem;
+      border-radius: 16px;
+      background-color: #fffdf5;
+    }
+
+        .modal-background {
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        }
+
+    .is-active {
+      background-color: var(--accent);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="has-text-centered mb-5">
+        <h1 class="title is-size-3 has-text-weight-semibold">Menu Kantin B</h1>
+        <p class="subtitle is-size-6 has-text-grey">Daftar menu yang tersedia di Kantin B</p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="buttons is-centered mb-5" id="kategori-filter">
+        <button class="button is-rounded is-light is-active" data-kategori="all">Semua</button>
+        <button class="button is-rounded is-light" data-kategori="Makanan Berat">Makanan Berat</button>
+        <button class="button is-rounded is-light" data-kategori="Makanan Ringan">Makanan Ringan</button>
+        <button class="button is-rounded is-light" data-kategori="Minuman">Minuman</button>
+      </div>
+
+      <div class="columns is-multiline" id="menu-list"></div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="menuModal">
+    <div class="modal-background" onclick="closeModal()"></div>
+    <div class="modal-card" style="width: 90%; max-width: 900px;">
+      <section class="modal-card-body">
+        <div class="columns is-vcentered">
+          <div class="column is-half">
+            <div class="swiper mySwiper">
+              <div class="swiper-wrapper" id="modalSwiperWrapper"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+            </div>
+          </div>
+          <div class="column is-half">
+            <h2 class="title is-5" id="modalTitle"></h2>
+            <p class="mb-4" id="modalDescription"></p>
+            <div class="box has-text-weight-semibold">
+              Kalori: <span id="modalCalories"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <button class="modal-close is-large" aria-label="close" onclick="closeModal()"></button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    const menuItems = [
+      {
+        name: "Nasi Goreng Telor",
+        description: "Nasi goreng hangat dengan telur dadar, cocok untuk sarapan atau makan siang.",
+        category: "Makanan Berat",
+        kalori: "520 kalori",
+        images: ["images/nasi-goreng-telor.jpg", "images/nasi-goreng-telor-nutrition.jpg"]
+      },
+      {
+        name: "Nasi Pecel",
+        description: "Nasi dengan sayuran rebus dan sambal kacang khas Jawa Timur.",
+        category: "Makanan Berat",
+        kalori: "450 kalori",
+        images: ["images/nasi-campur.jpg", "images/nasi-campur-nutrition.jpg"]
+      },
+      {
+        name: "Ayam Geprek",
+        description: "Ayam goreng tepung dengan sambal pedas, favorit mahasiswa.",
+        category: "Makanan Berat",
+        kalori: "600 kalori",
+        images: ["images/ayam-geprek.jpg", "images/ayam-geprek-nutrition.jpg"]
+      },
+      {
+        name: "Kentang Goreng",
+        description: "Kentang renyah disajikan hangat, cocok untuk camilan.",
+        category: "Makanan Ringan",
+        kalori: "300 kalori",
+        images: ["images/kentang-goreng.jpg", "images/kentang-goreng-nutrition-facts.jpg"]
+      },
+      {
+        name: "Es Teh",
+        description: "Minuman segar pelepas dahaga, cocok disajikan dingin.",
+        category: "Minuman",
+        kalori: "90 kalori",
+        images: ["images/es-teh.jpg", "images/es-teh-nutrition-facts.jpg"]
+      }
+    ];
+
+    const menuList = document.getElementById("menu-list");
+
+    // Generate cards
+    menuItems.forEach((item, index) => {
+      const col = document.createElement("div");
+      col.className = "column is-one-third";
+      col.innerHTML = `
+        <div class="menu-card" data-index="${index}" data-kategori="${item.category}">
+          <img src="${item.images[0]}" alt="${item.name}" class="menu-image">
+          <div class="menu-body">
+            <h2 class="title is-5 mb-2">${item.name}</h2>
+            <p class="is-size-7 has-text-grey">Kategori: ${item.category}</p>
+          </div>
+        </div>
+      `;
+      menuList.appendChild(col);
+    });
+
+    // Filter with buttons
+    document.querySelectorAll('#kategori-filter button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#kategori-filter button').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const selected = btn.dataset.kategori;
+        menuItems.forEach((item, i) => {
+          const show = selected === "all" || item.category === selected;
+          menuList.children[i].style.display = show ? "block" : "none";
+        });
+      });
+    });
+
+    // Modal logic
+    document.querySelectorAll(".menu-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const index = card.dataset.index;
+        const item = menuItems[index];
+        document.getElementById("modalTitle").textContent = item.name;
+        document.getElementById("modalDescription").textContent = item.description;
+        document.getElementById("modalCalories").textContent = item.kalori;
+        const swiperWrapper = document.getElementById("modalSwiperWrapper");
+        swiperWrapper.innerHTML = "";
+        item.images.forEach(img => {
+          const slide = document.createElement("div");
+          slide.className = "swiper-slide";
+          slide.innerHTML = `<img src="${img}" alt="${item.name}">`;
+          swiperWrapper.appendChild(slide);
+        });
+        document.getElementById("menuModal").classList.add("is-active");
+        new Swiper(".mySwiper", {
+          pagination: { el: ".swiper-pagination" },
+          navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }
+        });
+      });
+    });
+
+    function closeModal() {
+      document.getElementById("menuModal").classList.remove("is-active");
+    }
+  </script>
+</body>
+</html>
